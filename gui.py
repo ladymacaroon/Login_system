@@ -20,10 +20,8 @@ def submit():
     print("The name is : " + name)
     print("The password is : " + password)
     
-
     with open("data.txt", "a") as file:
-        file.write(f'{name} {encrypt_password(password)} :\n')
-
+        file.write(f'{name}:{encrypt_password(password)}\n')
 
     name_var.set("")
     passw_var.set("")
