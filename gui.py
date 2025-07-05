@@ -1,4 +1,5 @@
 import tkinter as tk
+import hashlib
  
 root=tk.Tk()
 
@@ -7,17 +8,21 @@ root.geometry("600x400")
 name_var=tk.StringVar()
 passw_var=tk.StringVar()
 
+def encrypt_password(password):
+    password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    return password_hash
+
 def submit():
 
-    name=name_var.get()
-    password=passw_var.get()
+    name = name_var.get()
+    password = passw_var.get()
     
     print("The name is : " + name)
     print("The password is : " + password)
     
 
     with open("data.txt", "a") as file:
-        file.write(f'{name} {password} :\n')
+        file.write(f'{name} {encrypt_password(password)} :\n')
 
 
     name_var.set("")
